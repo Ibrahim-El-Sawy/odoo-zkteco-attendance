@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+  <!-- =====================================================
+       ACTIONS
+  ====================================================== -->
+
+  <!-- Action: Attendance API (data.attendance) -->
+  <record id="apis_employee_check_action" model="ir.actions.act_window">
+    <field name="name">API Attendance</field>
+    <field name="res_model">data.attendance</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Action: Raw Data (data) -->
+  <record id="action_data" model="ir.actions.act_window">
+    <field name="name">Attendance Data</field>
+    <field name="res_model">data</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+
+  <!-- =====================================================
+       VIEWS: data.attendance
+  ====================================================== -->
+
+  <!-- Form View -->
+  <record id="apis_employee_check_form" model="ir.ui.view">
+    <field name="name">apis.attendance.form</field>
+    <field name="model">data.attendance</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name" />
+            <field name="date_only"/>
+            <field name="check_in" />
+            <field name="check_out"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Tree View -->
+  <record id="apis_employee_check_tree" model="ir.ui.view">
+    <field name="name">apis.attendance.tree</field>
+    <field name="model">data.attendance</field>
+    <field name="arch" type="xml">
+    <tree string="Attendance">
+        <field name="name"/>
+        <field name="date_only"/>
+        <field name="check_in"/>
+        <field name="check_out"/>
+    </tree>
+    </field>
+  </record>
+
+
+  <!-- =====================================================
+       VIEWS: data
+  ====================================================== -->
+
+  <!-- Tree View -->
+  <record id="view_data_tree" model="ir.ui.view">
+    <field name="name">data.tree</field>
+    <field name="model">data</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="UserID"/>
+        <field name="EmpCode"/>
+        <field name="Name"/>
+        <field name="VerifyMode"/>
+        <field name="InOutMode"/>
+        <field name="Timestamp"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Form View -->
+  <record id="view_data_form" model="ir.ui.view">
+    <field name="name">data.form</field>
+    <field name="model">data</field>
+    <field name="arch" type="xml">
+      <form string="Data Record">
+        <sheet>
+          <group>
+            <field name="UserID"/>
+            <field name="EmpCode"/>
+            <field name="Name"/>
+            <field name="VerifyMode"/>
+            <field name="InOutMode"/>
+            <field name="Timestamp"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+
+  <!-- =====================================================
+       MENUS
+  ====================================================== -->
+
+  <!-- Root Menu -->
+  <menuitem id="menu_api_root" name="API Menu" sequence="1"/>
+
+  <!-- Raw Attendance Data -->
+  <menuitem
+      id="menu_raw_data"
+      parent="menu_api_root"
+      name="Raw Attendance Data"
+      action="action_data"
+      sequence="10"
+  />
+
+  <!-- Processed API Attendance -->
+  <menuitem
+      id="menu_api_attendance"
+      parent="menu_api_root"
+      name="API Attendance"
+      action="apis_employee_check_action"
+      sequence="20"
+  />
+
+</odoo>
